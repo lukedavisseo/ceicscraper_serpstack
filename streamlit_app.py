@@ -78,7 +78,7 @@ if submit:
 				st.error(f"{e} found! Retrying...")
 				continue
 			
-		if serp['competitor'] and csv_toggle:
+		if serp['competitor'] and csv_toggle == 'Yes':
 			df = {key:pd.Series(value, dtype='object') for key, value in serp.items()}
 			serp_df = pd.DataFrame(df)
 			serp_df_csv = serp_df.to_csv()
