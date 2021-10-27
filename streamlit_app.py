@@ -26,6 +26,7 @@ competitor_urls = ["tradingeconomics.com", "theglobaleconomy.com", "countryecono
 st.title("CEIC Scraper")
 
 multi_kw = st.text_area('Enter keywords, 1 per line').lower()
+csv_toggle = st.radio('Create CSV', ['Yes', 'No'])
 
 lines = multi_kw.split("\n")
 keywords = [line for line in lines]
@@ -77,7 +78,7 @@ if submit:
 				st.error(f"{e} found! Retrying...")
 				continue
 			
-		if serp['competitor']:
+		if serp['competitor'] and csv_toggle:
 			df = {key:pd.Series(value, dtype='object') for key, value in serp.items()}
 			serp_df = pd.DataFrame(df)
 			serp_df_csv = serp_df.to_csv()
